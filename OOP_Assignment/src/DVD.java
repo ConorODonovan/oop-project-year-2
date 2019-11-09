@@ -6,12 +6,16 @@ public class DVD extends Item {
 
     public DVD() {
 
+        super();
+
         this.director = "Default";
         this.length = 0.00;
         this.ageRating = 0;
     }
 
-    public DVD(String director, double length, int ageRating) {
+    public DVD(String name, int borrowTime, double lateFee, boolean currentlyBorrowed, String director, double length, int ageRating) {
+
+        super(name, borrowTime, lateFee, currentlyBorrowed);
 
         this.director = director;
         this.length = length;
@@ -38,6 +42,7 @@ public class DVD extends Item {
         this.director = director;
     }
 
+    // Ensuring length can't be set to a negative number in the setter
     public void setLength(double length) {
         if (length >= 0) {
 
@@ -51,6 +56,7 @@ public class DVD extends Item {
 
     public void setAgeRating(int ageRating) {
 
+        // Ensuring ageRating can't be set to a negative number in the setter
         if (ageRating >= 0) {
 
             this.ageRating = ageRating;

@@ -6,15 +6,20 @@ public class Book extends Item {
 
     public Book() {
 
+        super();
+
         author = "Default";
         numberOfPages = 0;
         genre = "Default";
     }
 
-    public Book(String author, int numberOfPages, String genre) {
+    public Book(String name, int borrowTime, double lateFee, boolean currentlyBorrowed, String author, int numberOfPages, String genre) {
+
+        super(name, borrowTime, lateFee, currentlyBorrowed);
 
         this.author = author;
 
+        // Ensuring numberOfPages can't be set to anything other than M or F in the Constructor
         if (numberOfPages >= 0) {
 
             this.numberOfPages = numberOfPages;
@@ -49,6 +54,7 @@ public class Book extends Item {
 
     public void setNumberOfPages(int numberOfPages) {
 
+        // Ensuring numberOfPages can't be set to a negative number in the Constructor
         if (numberOfPages >= 0) {
 
             this.numberOfPages = numberOfPages;

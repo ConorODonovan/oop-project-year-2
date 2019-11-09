@@ -18,6 +18,7 @@ public class Library {
         this.address = address;
         this.phone = phone;
 
+        // Ensuring memberCount can't be set to a negative number in the Constructor
         if (memberCount >= 0) {
 
             this.memberCount = memberCount;
@@ -63,6 +64,7 @@ public class Library {
         phone = newPhone;
     }
 
+    // Ensuring memberCount can't be set to a negative number in the setter
     public void setMemberCount(int newMemberCount) {
 
         if (newMemberCount >= 0) {

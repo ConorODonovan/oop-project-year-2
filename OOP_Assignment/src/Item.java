@@ -17,7 +17,8 @@ public class Item {
 
         this.name = name;
 
-        if (borrowTime >= 0) {
+        // // Ensuring borrowTime is at least 1 in the Constructor
+        if (borrowTime > 0) {
 
             this.borrowTime = borrowTime;
         }
@@ -26,6 +27,7 @@ public class Item {
             this.borrowTime = 0;
         }
 
+        // Ensuring lateFee can't be set to a negative number in the Constructor
         if (lateFee >= 0.0) {
 
             this.lateFee = lateFee;
@@ -37,4 +39,59 @@ public class Item {
 
         this.currentlyBorrowed = currentlyBorrowed;
     }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public int getBorrowTime() {
+
+        return borrowTime;
+    }
+
+    public double getLateFee() {
+
+        return lateFee;
+    }
+
+    public boolean getCurrentlyBorrowed() {
+
+        return currentlyBorrowed;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
+    public void setBorrowTime(int borrowTime) {
+
+        // Ensuring borrowTime is at least 1 in the setter
+        if (borrowTime > 0) {
+
+            this.borrowTime = borrowTime;
+        }
+        else {
+
+            this.borrowTime = 1;
+        }
+    }
+
+    public void setLateFee(double lateFee) {
+
+        if (lateFee >= 0) {
+
+            this.lateFee = lateFee;
+        }
+        else {
+
+            this.lateFee = 0;
+        }
+    }
+
+     public void setCurrentlyBorrowed(boolean currentlyBorrowed) {
+
+        this.currentlyBorrowed = currentlyBorrowed;
+     }
 }
