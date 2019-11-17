@@ -1,21 +1,27 @@
 public class Library {
 
     private String name;
-    private String address;
+    private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
     private String phone;
     private int memberCount;
 
     public Library() {
 
-        name = "Conor & Conleth's Library";
-        address = "123 Main Street\nJavatown\nJavaland";
-        phone = "086-5551122";
+        name = "C & C's Books";
+        addressLine1 = "123 Java Lane";
+        addressLine2 = "Javatown";
+        addressLine3 = "Javaland";
+        phone = "555-1492";
         memberCount = 0;
     }
 
-    public Library(String name, String address, String phone, int memberCount) {
+    public Library(String name, String addressLine1, String addressLine2, String addressLine3, String phone, int memberCount) {
         this.name = name;
-        this.address = address;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.addressLine3 = addressLine3;
         this.phone = phone;
 
         // Ensuring memberCount can't be set to a negative number in the Constructor
@@ -34,9 +40,19 @@ public class Library {
         return name;
     }
 
-    public String getAddress() {
+    public String getAddressLine1() {
 
-        return address;
+        return addressLine1;
+    }
+
+    public String getAddressLine2() {
+
+        return addressLine2;
+    }
+
+    public String getAddressLine3() {
+
+        return addressLine3;
     }
 
     public String getPhone() {
@@ -54,9 +70,19 @@ public class Library {
         name = newName;
     }
 
-    public void setAddress(String newAddress) {
+    public void setAddressLine1(String newAddressLine1) {
 
-        address = newAddress;
+        addressLine1 = newAddressLine1;
+    }
+
+    public void setAddressLine2(String newAddressLine2) {
+
+        addressLine1 = newAddressLine2;
+    }
+
+    public void setAddressLine3(String newAddressLine3) {
+
+        addressLine1 = newAddressLine3;
     }
 
     public void setPhone(String newPhone) {
