@@ -95,6 +95,8 @@ public class MemberSection extends JPanel {
         As each element of the list is a Member object, not using a custom cell renderer means
         that what will actually be displayed on the window is the name of the object type plus a memory address
         This isn't useful for the front end of an application
+
+        NOTE: This was taken almost verbatim from Stack Overflow
         */
         memberJList.setCellRenderer(new DefaultListCellRenderer() {
             @Override

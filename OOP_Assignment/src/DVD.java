@@ -2,7 +2,6 @@ public class DVD extends Item {
 
     private String director;
     private int length;
-    private int ageRating;
 
     public DVD() {
 

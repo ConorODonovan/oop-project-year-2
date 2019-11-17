@@ -10,7 +10,7 @@ public class Library {
     public Library() {
 
         name = "C & C's Books";
-        addressLine1 = "123 Java Lane";
+        addressLine1 = "1010 Java Lane";
         addressLine2 = "Javatown";
         addressLine3 = "Javaland";
         phone = "555-1492";
