@@ -10,10 +10,13 @@ public class MemberSection extends JPanel {
 
     public MemberSection() {
 
-        setBackground(Color.green);
+        setBackground(new Color(146,161,185));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("Members");
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(24,0,8,0));
+        titleLabel.setFont(titleLabel.getFont().deriveFont (24.0f));
         add(titleLabel);
 
         // Initialising Member list
@@ -40,8 +43,28 @@ public class MemberSection extends JPanel {
         add(memberJList);
         memberJList.setModel(memberListModel);
 
+        // Label for member details area
+        JLabel memberDetailsLabel = new JLabel("Member Details");
+        memberDetailsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        memberDetailsLabel.setBorder(BorderFactory.createEmptyBorder(32,0,8,0));
+        memberDetailsLabel.setFont(memberDetailsLabel.getFont().deriveFont (24.0f));
+        add(memberDetailsLabel);
+
+        // Section to display details of of currently selected member
+        TextArea memberDetails = new TextArea();
+        memberDetails.setMaximumSize(new Dimension(300,160));
+        memberDetails.setFont(memberJList.getFont().deriveFont (16.0f));
+        add(memberDetails);
+
+        // Empty label to create space between text area and button - only way I could figure out how to do it
+        JLabel emptyLabel = new JLabel("");
+        emptyLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        emptyLabel.setBorder(BorderFactory.createEmptyBorder(8,0,0,0));
+        add(emptyLabel);
+
         // Button to add a new member
         JButton addNewMemberButton = new JButton("Add New Member");
+        addNewMemberButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(addNewMemberButton);
 
         addNewMemberButton.addActionListener((new ActionListener() {
@@ -63,16 +86,6 @@ public class MemberSection extends JPanel {
                 addMemberToList(memberList, memberJList, memberListModel, member);
             }
         }));
-
-        // Label for member details area
-        JLabel memberDetailsLabel = new JLabel("Member Details");
-        add(memberDetailsLabel);
-
-        // Section to display details of of currently selected member
-        TextArea memberDetails = new TextArea();
-        memberDetails.setMaximumSize(new Dimension(320,200));
-        add(memberDetails);
-
 
         // Gets the selected member and displays their details below
         memberJList.addListSelectionListener(new ListSelectionListener() {

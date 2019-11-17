@@ -7,7 +7,7 @@ public class TopInfoSection extends JPanel {
 
         Library library = new Library();
 
-        setBackground(Color.pink);
+        setBackground(new Color(42, 47, 78));
         setPreferredSize(new Dimension(appRes.width, appRes.height/8));
         setLayout(new GridLayout(1,3));
 
@@ -21,6 +21,7 @@ public class TopInfoSection extends JPanel {
         // Library Name displayed on header
         JLabel libName = new JLabel(library.getName());
         libName.setFont(libName.getFont().deriveFont (48.0f));
+        libName.setForeground(new Color(255,200,37));
         add(libName);
 
         // Contact details displayed on header
@@ -30,15 +31,21 @@ public class TopInfoSection extends JPanel {
         JPanel contact = new JPanel();
         contact.setLayout(new GridLayout(6,1));
         contact.setBorder(BorderFactory.createEmptyBorder(0,64,0,0));
-        contact.setBackground(Color.pink);
+        contact.setBackground(new Color(42, 47, 78));
         add(contact);
 
         JLabel libAddressHeader = new JLabel("Address:");
+        libAddressHeader.setForeground(new Color(255,200,37));
         JLabel libAddressLine1 = new JLabel(library.getAddressLine1());
+        libAddressLine1.setForeground(new Color(255,200,37));
         JLabel libAddressLine2 = new JLabel(library.getAddressLine2());
+        libAddressLine2.setForeground(new Color(255,200,37));
         JLabel libAddressLine3 = new JLabel(library.getAddressLine3());
+        libAddressLine3.setForeground(new Color(255,200,37));
         JLabel libPhoneHeader = new JLabel("Phone:");
+        libPhoneHeader.setForeground(new Color(255,200,37));
         JLabel libPhone = new JLabel(library.getPhone());
+        libPhone.setForeground(new Color(255,200,37));
 
         contact.add(libAddressHeader);
         contact.add(libAddressLine1);

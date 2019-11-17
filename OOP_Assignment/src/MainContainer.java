@@ -6,6 +6,6 @@ public class MainContainer extends JPanel {
     public MainContainer(Dimension size) {
 
         setPreferredSize(size);
-        setBackground(Color.pink);
+        setBackground(new Color(42, 47, 78));
     }
 }
