@@ -1,0 +1,86 @@
+Book
+The Lord of the Rings
+14
+1.50
+J. R. R. Tolkien
+1244
+Fantasy
+
+Book
+Snow Crash
+14
+1.50
+Neal Stephenson
+448
+Science Fiction
+
+Book
+To Kill A Mockingbird
+14
+1.50
+Harper Lee
+320
+Contemporary Fiction
+
+Book
+A Brief History of Time
+14
+1.50
+Stephen Hawking
+272
+Non-fiction
+
+Book
+Kafka on the Shore
+14
+1.50
+Haruki Murakami
+505
+Contemporary Fiction
+
+DVD
+Star Wars: A New Hope
+5
+2.50
+George Lucas
+124
+
+DVD
+Hidden Figures
+5
+2.50
+Theodore Melfi
+128
+
+DVD
+Up
+5
+2.50
+Pete Doctor
+92
+
+DVD
+Erin Brockovich
+5
+2.50
+Steven Soderbergh
+125
+
+DVD
+The Princess Bride
+5
+2.50
+Rob Reiner
+94
+
+Magazine
+Horse and Hound
+7
+1.25
+6
+
+Magazine
+PC Gamer
+7
+1.25
+22

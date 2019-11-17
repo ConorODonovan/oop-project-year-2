@@ -1,19 +1,24 @@
+import java.util.*;
+
 public class Member {
 
-    private String name;
+    private String forename;
+    private String surname;
     private char gender;
-    private boolean isAdult;
+    private int age;
 
     public Member() {
 
-        name = "John Smith";
+        forename = "John";
+        surname = "Smith";
         gender = 'M';
-        isAdult = true;
+        age = 30;
     }
 
-    public Member(String name, char gender, boolean isAdult) {
+    public Member(String forename, String surname, char gender, int age) {
 
-        this.name = name;
+        this.forename = forename;
+        this.surname = surname;
 
         // Ensuring gender can't be set to anything other than M or F in the Constructor
         if (gender == 'M' || gender == 'F') {
@@ -25,12 +30,17 @@ public class Member {
             this.gender = 'F';
         }
 
-        this.isAdult = isAdult;
+        this.age = age;
     }
 
-    public String getName() {
+    public String getForename() {
 
-        return name;
+        return forename;
+    }
+
+    public String getSurname() {
+
+        return surname;
     }
 
     public char getGender() {
@@ -38,14 +48,19 @@ public class Member {
         return gender;
     }
 
-    public boolean getIsAdult() {
+    public int getAge() {
 
-        return isAdult;
+        return age;
     }
 
-    public void setName(String newName) {
+    public void setForename(String newForename) {
 
-        name = newName;
+        forename = newForename;
+    }
+
+    public void setSurname(String newSurname) {
+
+        surname = newSurname;
     }
 
     public void setGender(char newGender) {
@@ -61,8 +76,8 @@ public class Member {
         }
     }
 
-    public void setIsAdult(boolean newIsAdult) {
+    public void setAge(int newAge) {
 
-        isAdult = newIsAdult;
+        age = newAge;
     }
 }
