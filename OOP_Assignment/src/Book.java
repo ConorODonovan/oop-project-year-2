@@ -19,7 +19,7 @@ public class Book extends Item {
 
         this.author = author;
 
-        // Ensuring numberOfPages can't be set to anything other than M or F in the Constructor
+        // Ensuring numberOfPages can't be set to a negative number in the Constructor
         if (numberOfPages >= 0) {
 
             this.numberOfPages = numberOfPages;

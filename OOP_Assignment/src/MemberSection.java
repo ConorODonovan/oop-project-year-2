@@ -1,11 +1,8 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.awt.event.*;
+import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.*;
 import java.awt.*;
 
 public class MemberSection extends JPanel {
@@ -13,7 +10,7 @@ public class MemberSection extends JPanel {
     private ArrayList<Member> memberList;
     private DefaultListModel memberListModel;
     private JList memberJList;
-    private String memberArr[];
+    private String[] memberArr;
 
     public MemberSection() {
 
@@ -79,8 +76,7 @@ public class MemberSection extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // The bug fix for when we add a new member to the array we use a try and catch exception called E1 because we are trying to read and add
-                //to the array at same time
+
                 try {
 
                     // Asks user to input new member details with a series of popups
@@ -92,10 +88,7 @@ public class MemberSection extends JPanel {
 
                         String memberGenderString = JOptionPane.showInputDialog("Please enter the member's gender - F (Female) or M (Male)");
 
-                        if (
-                                (memberGenderString.equals("M")) || (memberGenderString.equals("F")) ||
-                                        (memberGenderString.equals("m")) || (memberGenderString.equals("f"))
-                        )
+                        if ((memberGenderString.equals("M")) || (memberGenderString.equals("F")) || (memberGenderString.equals("m")) || (memberGenderString.equals("f")))
                         {
 
                             validgender = true;
@@ -232,6 +225,7 @@ public class MemberSection extends JPanel {
 
         for (int i = 0; i < list.size(); i ++) {
 
+            // Append member details to string
             memberListStr += list.get(i).getForename();
             memberListStr += " ";
             memberListStr += list.get(i).getSurname();
@@ -244,19 +238,22 @@ public class MemberSection extends JPanel {
 
         PrintWriter fileOut;
         String fileName = "MemberList.txt"; // Write to root of your package
-        try{
+        try {
+
             fileOut = new PrintWriter(fileName);
             fileOut.println(memberListStr);
             fileOut.close();
             System.out.println("File created successfully!\n");
         }
         catch (FileNotFoundException err){
+
             System.out.println("Error: " + err.getMessage());
         }
     }
 
     public String[] saveMemberNames(ArrayList<Member> list) {
 
+        // Saves the member names to an array
         memberArr = new String[list.size()];
 
         for (int i = 0; i < list.size(); i++) {
@@ -269,6 +266,7 @@ public class MemberSection extends JPanel {
 
     public void printMemberNames(String[] arr) {
 
+        // Prints the contents of the array holding the member names to the console
         for (int i = 0; i < arr.length; i ++) {
 
             System.out.println("Member " + (i + 1) + ": " + arr[i]);

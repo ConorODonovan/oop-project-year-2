@@ -19,9 +19,14 @@ public class Member {
         this.surname = surname;
 
         // Ensuring gender can't be set to anything other than M or F in the Constructor
-        if (gender == 'M' || gender == 'F') {
+        // Also allows for entering lowercase m and f
+        if (gender == 'M' || gender == 'm') {
 
-            this.gender = gender;
+            this.gender = 'M';
+        }
+        else if (gender == 'F' || gender == 'f') {
+
+            this.gender = 'F';
         }
         else {
 
@@ -64,9 +69,15 @@ public class Member {
     public void setGender(char newGender) {
 
         // Ensuring gender can't be set to anything other than M or F in the setter
-        if (newGender == 'M' || newGender == 'F') {
+        // and allowing for entry of lower-case m and f
+        // Defaults to F if invalid character entered
+        if (newGender == 'M' || newGender == 'm') {
 
-            gender = newGender;
+            gender = 'M';
+        }
+        else if (newGender == 'F' || newGender == 'f') {
+
+            gender = 'F';
         }
         else {
 

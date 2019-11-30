@@ -3,11 +3,6 @@ import java.awt.*;
 
 public class TopInfoSection extends JPanel {
 
-    private Library library;
-    private ImageIcon imgThisImg;
-    private JLabel libIcon, libName, libAddressHeader, libAddressLine1, libAddressLine2, libAddressLine3, libPhoneHeader, libPhone;
-    private JPanel contact;
-
     public TopInfoSection(Dimension appRes) {
 
         setBackground(new Color(42, 47, 78));
@@ -18,8 +13,8 @@ public class TopInfoSection extends JPanel {
     public void createLibraryIcon() {
 
         // Icon for Library header
-        imgThisImg = new ImageIcon("src/LibraryIcon.png");
-        libIcon = new JLabel();
+        ImageIcon imgThisImg = new ImageIcon("LibraryIcon.png");
+        JLabel libIcon = new JLabel();
         libIcon.setIcon(imgThisImg);
         libIcon.setBorder(BorderFactory.createEmptyBorder(0,130,0,0));
         add(libIcon);
@@ -27,10 +22,10 @@ public class TopInfoSection extends JPanel {
 
     public void createLibraryInfo() {
 
-        library = new Library("C & C's Books", "1010 Java Lane", "Javatown", "Javaland", "555-1492");
+        Library library = new Library("C & C's Books", "1010 Java Lane", "Javatown", "Javaland", "555-1492");
 
         // Library Name displayed on header
-        libName = new JLabel(library.getName());
+        JLabel libName = new JLabel(library.getName());
         libName.setFont(libName.getFont().deriveFont (48.0f));
         libName.setForeground(new Color(255,200,37));
         add(libName);
@@ -39,23 +34,23 @@ public class TopInfoSection extends JPanel {
         // New panel created so that contact details could be displayed over multiple lines
         // JLabel does not recognise line breaks so trying to use them when constructing a string for a JLabel doesn't
         // work - you just end up with everything on one line
-        contact = new JPanel();
+        JPanel contact = new JPanel();
         contact.setLayout(new GridLayout(6,1));
         contact.setBorder(BorderFactory.createEmptyBorder(0,64,0,0));
         contact.setBackground(new Color(42, 47, 78));
         add(contact);
 
-        libAddressHeader = new JLabel("Address:");
+        JLabel libAddressHeader = new JLabel("Address:");
         libAddressHeader.setForeground(new Color(255,200,37));
-        libAddressLine1 = new JLabel(library.getAddressLine1());
+        JLabel libAddressLine1 = new JLabel(library.getAddressLine1());
         libAddressLine1.setForeground(new Color(255,200,37));
-        libAddressLine2 = new JLabel(library.getAddressLine2());
+        JLabel libAddressLine2 = new JLabel(library.getAddressLine2());
         libAddressLine2.setForeground(new Color(255,200,37));
-        libAddressLine3 = new JLabel(library.getAddressLine3());
+        JLabel libAddressLine3 = new JLabel(library.getAddressLine3());
         libAddressLine3.setForeground(new Color(255,200,37));
-        libPhoneHeader = new JLabel("Phone:");
+        JLabel libPhoneHeader = new JLabel("Phone:");
         libPhoneHeader.setForeground(new Color(255,200,37));
-        libPhone = new JLabel(library.getPhone());
+        JLabel libPhone = new JLabel(library.getPhone());
         libPhone.setForeground(new Color(255,200,37));
 
         contact.add(libAddressHeader);

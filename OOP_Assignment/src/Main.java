@@ -1,5 +1,5 @@
 import java.awt.*;
-import java.util.Scanner;
+import java.util.*;
 import javax.swing.*;
 
 public class Main {
@@ -14,7 +14,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        String userInput = "";
+        String userInput;
         userInput = scanner.nextLine();
 
         // Loop for input validation
@@ -65,5 +65,13 @@ public class Main {
         // Create Inventory section
         InventorySection inventorySection = new InventorySection();
         mainBodyContainer.add(inventorySection);
+        inventorySection.readFile();
+        inventorySection.inventoryComponents();
+
+        //******************************//
+        // Setting the frame to visible //
+        //******************************//
+
+        frame.setVisible(true); // This needs to be done last to ensure that all components load and are drawn correctly
     }
 }

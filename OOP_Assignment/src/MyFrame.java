@@ -34,7 +34,7 @@ public class MyFrame extends JFrame {
         setLocation((screenWidth - appWidth)/2, (screenHeight - appHeight)/2); // Draws the window in the center of the screen, regardless of resolution
 
         // Make the JFrame visible
-        setVisible(true);
+        //setVisible(true);
     }
 
     public int getScreenWidth() {

@@ -1,13 +1,9 @@
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
 public class InventorySection extends JPanel {
 
@@ -19,14 +15,18 @@ public class InventorySection extends JPanel {
         setBackground(new Color(199,207,221));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        inventoryList = new ArrayList<>(); // Array list to store the objects in the Library's inventory
+        inventoryListModel = new DefaultListModel(); // This is to dynamically manage the contents of the JList we'll use to display the Inventory List
+    }
+
+    public void readFile() {
+
         //************************************//
         // Reading text file of Library Items //
         //************************************//
 
         Scanner fileIn;
         String fileName = "LibraryInventoryList.txt";
-        inventoryList = new ArrayList<>(); // Array list to store the objects in the Library's inventory
-        inventoryListModel = new DefaultListModel(); // This is to dynamically manage the contents of the JList we'll use to display the Inventory List
 
         try {
 
@@ -122,18 +122,19 @@ public class InventorySection extends JPanel {
 
                         fileIn.nextLine();
                     }
-                }
-                else {
+                } else {
                     fileIn.nextLine();
                 }
             }
 
             fileIn.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
 
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public void inventoryComponents() {
 
         //******************************//
         // Inventory section components //
@@ -141,8 +142,8 @@ public class InventorySection extends JPanel {
 
         JLabel titleLabel = new JLabel("Items to Borrow");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(24,0,8,0));
-        titleLabel.setFont(titleLabel.getFont().deriveFont (24.0f));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(24, 0, 8, 0));
+        titleLabel.setFont(titleLabel.getFont().deriveFont(24.0f));
         add(titleLabel);
 
         // Creating the JList, which will display the Inventory List, and adding it to the window
@@ -150,14 +151,14 @@ public class InventorySection extends JPanel {
         add(inventoryJList);
         inventoryJList.setModel(inventoryListModel);
 
-        /*
-        This next function is used to determine what the JList component actually displays
-        As each element of the list is a Member object, not using a custom cell renderer means
-        that what will actually be displayed on the window is the name of the object type plus a memory address
-        This isn't useful for the front end of an application
+            /*
+            This next function is used to determine what the JList component actually displays
+            As each element of the list is a Member object, not using a custom cell renderer means
+            that what will actually be displayed on the window is the name of the object type plus a memory address
+            This isn't useful for the front end of an application
 
-        NOTE: This was taken almost verbatim from Stack Overflow, although in this case, the Object type needed to be checked first
-        */
+            NOTE: This was taken almost verbatim from Stack Overflow, although in this case, the Object type needed to be checked first
+            */
         inventoryJList.setCellRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -173,13 +174,11 @@ public class InventorySection extends JPanel {
 
                         type = ("Book");
                         name = ((Book) value).getName();
-                    }
-                    else if (value instanceof DVD) {
+                    } else if (value instanceof DVD) {
 
                         type = ("DVD");
                         name = ((DVD) value).getName();
-                    }
-                    else if (value instanceof Magazine) {
+                    } else if (value instanceof Magazine) {
 
                         type = ("Magazine");
                         name = ((Magazine) value).getName();
@@ -200,14 +199,14 @@ public class InventorySection extends JPanel {
         // Label for Item Details text area
         JLabel detailsLabel = new JLabel("Item Details");
         detailsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        detailsLabel.setBorder(BorderFactory.createEmptyBorder(32,0,8,0));
-        detailsLabel.setFont(detailsLabel.getFont().deriveFont (24.0f));
+        detailsLabel.setBorder(BorderFactory.createEmptyBorder(32, 0, 8, 0));
+        detailsLabel.setFont(detailsLabel.getFont().deriveFont(24.0f));
         add(detailsLabel);
 
         // Section to display details of of currently selected member
         TextArea itemDetails = new TextArea();
-        itemDetails.setMaximumSize(new Dimension(300,160));
-        itemDetails.setFont(inventoryJList.getFont().deriveFont (16.0f));
+        itemDetails.setMaximumSize(new Dimension(300, 160));
+        itemDetails.setFont(inventoryJList.getFont().deriveFont(16.0f));
         add(itemDetails);
 
         // Gets the selected member and displays their details below
@@ -227,8 +226,7 @@ public class InventorySection extends JPanel {
                     if (currentlyBorrowed == false) {
 
                         currentlyBorrowedStr = "Yes";
-                    }
-                    else {
+                    } else {
 
                         currentlyBorrowedStr = "No";
                     }
@@ -247,7 +245,7 @@ public class InventorySection extends JPanel {
                         String director = ((DVD) inventoryJList.getSelectedValue()).getDirector(); // Needs to be cast back to DVD type as JList elements are some other type
                         int length = ((DVD) inventoryJList.getSelectedValue()).getLength(); // Needs to be cast back to DVD type as JList elements are some other type
 
-                        itemDetails.setText(name + "\n" + "Directed by " + director + "\n" + length + " minutes\n"  + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + lateFee + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type DVD
+                        itemDetails.setText(name + "\n" + "Directed by " + director + "\n" + length + " minutes\n" + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + lateFee + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type DVD
                     }
 
                     if (inventoryJList.getSelectedValue() instanceof Magazine) {
@@ -263,7 +261,7 @@ public class InventorySection extends JPanel {
         // Empty label to create space between text area and button - only way I could figure out how to do it
         JLabel emptyLabel1 = new JLabel("");
         emptyLabel1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        emptyLabel1.setBorder(BorderFactory.createEmptyBorder(8,0,0,0));
+        emptyLabel1.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
         add(emptyLabel1);
 
         // Button to borrow item
@@ -289,7 +287,7 @@ public class InventorySection extends JPanel {
         // Empty label to create space between text area and button - only way I could figure out how to do it
         JLabel emptyLabel2 = new JLabel("");
         emptyLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        emptyLabel2.setBorder(BorderFactory.createEmptyBorder(8,0,0,0));
+        emptyLabel2.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
         add(emptyLabel2);
 
         // Button to return item

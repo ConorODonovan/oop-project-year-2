@@ -16,7 +16,16 @@ public class DVD extends Item {
         super(name, borrowTime, lateFee, currentlyBorrowed); // Calls constructor from parent (Item)
 
         this.director = director;
-        this.length = length;
+
+        // Ensuring length can't be set to a negative number in the constructor
+        if (length >= 0) {
+
+            this.length = length;
+        }
+        else {
+
+            this.length = 0;
+        }
     }
 
     public String getDirector() {
@@ -34,8 +43,9 @@ public class DVD extends Item {
         this.director = director;
     }
 
-    // Ensuring length can't be set to a negative number in the setter
     public void setLength(int length) {
+
+        // Ensuring length can't be set to a negative number in the setter
         if (length >= 0) {
 
             this.length = length;
