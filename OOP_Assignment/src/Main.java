@@ -10,7 +10,10 @@ public class Main {
         // Get console input before drawing Frame //
         //****************************************//
 
-        System.out.println("Welcome to our library system\nPlease type S to start, or E to exit. Then press Enter");
+        System.out.println("=============================");
+        System.out.println("Welcome to our library system");
+        System.out.println("=============================");
+        System.out.println("Please type S to start, or E to exit. Then press Enter");
 
         Scanner scanner = new Scanner(System.in);
 

@@ -107,7 +107,7 @@ public class MemberSection extends JPanel {
                 }
                 catch (Exception e1) {
 
-                    System.out.println("Beware you are reading from and writing to an array");
+                    System.out.println("New member creation cancelled or error occurred");
                 }
             }
         }));

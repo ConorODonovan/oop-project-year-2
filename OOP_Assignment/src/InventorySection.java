@@ -237,7 +237,7 @@ public class InventorySection extends JPanel {
                         int numberOfPages = ((Book) inventoryJList.getSelectedValue()).getNumberOfPages(); // Needs to be cast back to Book type as JList elements are some other type
                         String genre = ((Book) inventoryJList.getSelectedValue()).getGenre(); // Needs to be cast back to Book type as JList elements are some other type
 
-                        itemDetails.setText(name + "\n" + "By " + author + "\n" + genre + "\n" + numberOfPages + " pages\n" + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + lateFee + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type Book
+                        itemDetails.setText(name + "\n" + "By " + author + "\n" + genre + "\n" + numberOfPages + " pages\n" + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + "€" + lateFee + "0" + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type Book
                     }
 
                     if (inventoryJList.getSelectedValue() instanceof DVD) {
@@ -245,14 +245,14 @@ public class InventorySection extends JPanel {
                         String director = ((DVD) inventoryJList.getSelectedValue()).getDirector(); // Needs to be cast back to DVD type as JList elements are some other type
                         int length = ((DVD) inventoryJList.getSelectedValue()).getLength(); // Needs to be cast back to DVD type as JList elements are some other type
 
-                        itemDetails.setText(name + "\n" + "Directed by " + director + "\n" + length + " minutes\n" + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + lateFee + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type DVD
+                        itemDetails.setText(name + "\n" + "Directed by " + director + "\n" + length + " minutes\n" + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + "€" + lateFee + "0" + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type DVD
                     }
 
                     if (inventoryJList.getSelectedValue() instanceof Magazine) {
 
                         int issue = ((Magazine) inventoryJList.getSelectedValue()).getIssue(); // Needs to be cast back to Magazine type as JList elements are some other type
 
-                        itemDetails.setText(name + "\n" + "Issue No. " + issue + "\n" + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + lateFee + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type Magazine
+                        itemDetails.setText(name + "\n" + "Issue No. " + issue + "\n" + "Can be borrowed for " + borrowTime + " days\n" + "Late fee is " + "€" + lateFee + "0" + " per day\n" + "Available: " + currentlyBorrowedStr); // Build the string to be displayed for type Magazine
                     }
                 }
             }
