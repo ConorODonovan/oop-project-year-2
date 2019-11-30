@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -7,6 +9,11 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
 public class MemberSection extends JPanel {
+
+    private ArrayList<Member> memberList;
+    private DefaultListModel memberListModel;
+    private JList memberJList;
+    private String memberArr[];
 
     public MemberSection() {
 
@@ -20,8 +27,8 @@ public class MemberSection extends JPanel {
         add(titleLabel);
 
         // Initialising Member list
-        ArrayList<Member> memberList = new ArrayList<>();
-        DefaultListModel memberListModel = new DefaultListModel(); // This is to dynamically manage the contents of the JList we'll use to display the Member List
+        memberList = new ArrayList<>();
+        memberListModel = new DefaultListModel(); // This is to dynamically manage the contents of the JList we'll use to display the Member List
 
         // Creating some existing members to add to list
         Member member1 = new Member("Sarah", "Williamson", 'F', 27);
@@ -39,7 +46,7 @@ public class MemberSection extends JPanel {
         memberListModel.addElement(member3);
 
         // Creating the JList, which will display the Member List, and adding it to the window
-        JList memberJList = new JList();
+        memberJList = new JList();
         add(memberJList);
         memberJList.setModel(memberListModel);
 
@@ -67,23 +74,48 @@ public class MemberSection extends JPanel {
         addNewMemberButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(addNewMemberButton);
 
+        // Action when clicking on "Add New Member" button
         addNewMemberButton.addActionListener((new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                // The bug fix for when we add a new member to the array we use a try and catch exception called E1 because we are trying to read and add
+                //to the array at same time
+                try {
 
-                // Asks user to input new member details with a series of popups
-                String memberForeName = JOptionPane.showInputDialog("Please enter the member's first name");
-                String memberSurname = JOptionPane.showInputDialog("Please enter the member's surname");
-                char memberGender = 'F'; // Defaults to F, need to change this to allow user to select gender
-                String memberAgeStr = JOptionPane.showInputDialog("Please enter the member's age");
-                int memberAge = Integer.parseInt(memberAgeStr);
+                    // Asks user to input new member details with a series of popups
+                    String memberForeName = JOptionPane.showInputDialog("Please enter the member's first name");
+                    String memberSurname = JOptionPane.showInputDialog("Please enter the member's surname");
+                    char memberGender = 'N';
+                    boolean validgender = false;
+                    while (validgender == false) {
 
-                // Creates a new member object using the details the user inputs
-                Member member = new Member(memberForeName, memberSurname, memberGender, memberAge);
+                        String memberGenderString = JOptionPane.showInputDialog("Please enter the member's gender - F (Female) or M (Male)");
 
-                // Adds the new member object to the member list
-                addMemberToList(memberList, memberJList, memberListModel, member);
+                        if (
+                                (memberGenderString.equals("M")) || (memberGenderString.equals("F")) ||
+                                        (memberGenderString.equals("m")) || (memberGenderString.equals("f"))
+                        )
+                        {
+
+                            validgender = true;
+                            memberGender = memberGenderString.charAt(0);
+                        }
+                    }
+
+                    String memberAgeStr = JOptionPane.showInputDialog("Please enter the member's age");
+                    int memberAge = Integer.parseInt(memberAgeStr);
+
+                    // Creates a new member object using the details the user inputs
+                    Member member = new Member(memberForeName, memberSurname, memberGender, memberAge);
+
+                    // Adds the new member object to the member list
+                    addMemberToList(memberList, memberJList, memberListModel, member);
+                }
+                catch (Exception e1) {
+
+                    System.out.println("Beware you are reading from and writing to an array");
+                }
             }
         }));
 
@@ -92,7 +124,14 @@ public class MemberSection extends JPanel {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+                if (e.getValueIsAdjusting()) {
+
+                    // The getValueIsAdjusting() method came from Stack Overflow. It returns true or false depending on whether actions
+                    // are being performed to change the list selection, or they are completed.
+                    // Checking if this is true seems to be necessary to avoid errors when adding a new value to the list.
+                    // Omitting the check, or checking if it returns false, causes errors when a new value is added (although
+                    // it does not actually crash the program or seem to impact anything
+
                     String forename = ((Member) memberJList.getSelectedValue()).getForename(); // Needs to be cast back to Member type as JList elements are some other type
                     String surname = ((Member) memberJList.getSelectedValue()).getSurname(); // Needs to be cast back to Member type as JList elements are some other type
                     char gender = ((Member) memberJList.getSelectedValue()).getGender(); // Needs to be cast back to Member type as JList elements are some other type
@@ -128,6 +167,47 @@ public class MemberSection extends JPanel {
                 return renderer;
             }
         });
+
+        // Empty label to create space between text area and button - only way I could figure out how to do it
+        JLabel emptyLabel2 = new JLabel("");
+        emptyLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        emptyLabel2.setBorder(BorderFactory.createEmptyBorder(8,0,0,0));
+        add(emptyLabel2);
+
+        // Button to save member list as text file
+        JButton writeMemberListToFile = new JButton("Download Member List");
+        writeMemberListToFile.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(writeMemberListToFile);
+
+        writeMemberListToFile.addActionListener((new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                saveMemberList(memberList);
+            }
+        }));
+
+        // Empty label to create space between text area and button - only way I could figure out how to do it
+        JLabel emptyLabel3 = new JLabel("");
+        emptyLabel3.setAlignmentX(Component.CENTER_ALIGNMENT);
+        emptyLabel3.setBorder(BorderFactory.createEmptyBorder(8,0,0,0));
+        add(emptyLabel3);
+
+        // Button to save member names as array
+        JButton saveMemberNamesButton = new JButton("Save Member Names");
+        saveMemberNamesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(saveMemberNamesButton);
+
+        saveMemberNamesButton.addActionListener((new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                memberArr = saveMemberNames(memberList);
+                printMemberNames(memberArr);
+            }
+        }));
     }
 
     public void addMemberToList(ArrayList<Member> list, JList jList, DefaultListModel modelList, Member newMember) {
@@ -140,9 +220,60 @@ public class MemberSection extends JPanel {
          */
 
         list.add(newMember); // Adds new member to the ArrayList
-        modelList.add(list.size() - 1, newMember); // Adds new member to the list model at index position equal to current member list size; i.e. puts it at the end
+        modelList.add(modelList.size(), newMember); // Adds new member to the list model at index position equal to current member list size; i.e. puts it at the end
 
         // Refreshes the JList component, so the new member is displayed
         jList.setModel(modelList);
+    }
+
+    public void saveMemberList(ArrayList<Member> list) {
+
+        String memberListStr = "MEMBER LIST\n\n";
+
+        for (int i = 0; i < list.size(); i ++) {
+
+            memberListStr += list.get(i).getForename();
+            memberListStr += " ";
+            memberListStr += list.get(i).getSurname();
+            memberListStr += "\n";
+            memberListStr += list.get(i).getAge();
+            memberListStr += "\n";
+            memberListStr += list.get(i).getGender();
+            memberListStr += "\n\n";
+        }
+
+        PrintWriter fileOut;
+        String fileName = "MemberList.txt"; // Write to root of your package
+        try{
+            fileOut = new PrintWriter(fileName);
+            fileOut.println(memberListStr);
+            fileOut.close();
+            System.out.println("File created successfully!\n");
+        }
+        catch (FileNotFoundException err){
+            System.out.println("Error: " + err.getMessage());
+        }
+    }
+
+    public String[] saveMemberNames(ArrayList<Member> list) {
+
+        memberArr = new String[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+
+            memberArr[i] = list.get(i).getForename() + " " + list.get(i).getSurname();
+        }
+
+        return memberArr;
+    }
+
+    public void printMemberNames(String[] arr) {
+
+        for (int i = 0; i < arr.length; i ++) {
+
+            System.out.println("Member " + (i + 1) + ": " + arr[i]);
+        }
+
+        System.out.println("\n");
     }
 }

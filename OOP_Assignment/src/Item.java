@@ -1,4 +1,4 @@
-public class Item {
+abstract class Item {
 
     private String name;
     private int borrowTime;
@@ -80,6 +80,7 @@ public class Item {
 
     public void setLateFee(double lateFee) {
 
+        // Ensuring lateFee can't be set to a negative number in the setter
         if (lateFee >= 0) {
 
             this.lateFee = lateFee;

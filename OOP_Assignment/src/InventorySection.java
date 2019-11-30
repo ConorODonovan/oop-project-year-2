@@ -2,12 +2,17 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InventorySection extends JPanel {
+
+    private ArrayList<Object> inventoryList;
+    private DefaultListModel inventoryListModel;
 
     public InventorySection() {
 
@@ -20,13 +25,12 @@ public class InventorySection extends JPanel {
 
         Scanner fileIn;
         String fileName = "LibraryInventoryList.txt";
-        ArrayList<Object> inventoryList = new ArrayList<>(); // Array list to store the objects in the Library's inventory
-        DefaultListModel inventoryListModel = new DefaultListModel(); // This is to dynamically manage the contents of the JList we'll use to display the Inventory List
+        inventoryList = new ArrayList<>(); // Array list to store the objects in the Library's inventory
+        inventoryListModel = new DefaultListModel(); // This is to dynamically manage the contents of the JList we'll use to display the Inventory List
 
         try {
 
             fileIn = new Scanner(new FileReader(fileName));
-            //fileIn.useDelimiter("\n");
 
             while (fileIn.hasNextLine()) {
 
@@ -162,27 +166,31 @@ public class InventorySection extends JPanel {
 
                 if (renderer instanceof JLabel) {
 
+                    String type = "";
+                    String name = "";
+
                     if (value instanceof Book) {
 
-                        String type = ("Book");
-                        String name = ((Book) value).getName();
-
-                        ((JLabel) renderer).setText(name + " (" + type + ")");
+                        type = ("Book");
+                        name = ((Book) value).getName();
                     }
                     else if (value instanceof DVD) {
 
-                        String type = ("DVD");
-                        String name = ((DVD) value).getName();
-
-                        ((JLabel) renderer).setText(name + " (" + type + ")");
+                        type = ("DVD");
+                        name = ((DVD) value).getName();
                     }
                     else if (value instanceof Magazine) {
 
-                        String type = ("Magazine");
-                        String name = ((Magazine) value).getName();
-
-                        ((JLabel) renderer).setText(name + " (" + type + ")");
+                        type = ("Magazine");
+                        name = ((Magazine) value).getName();
                     }
+
+                    if (((Item) value).getCurrentlyBorrowed() == true) {
+
+                        ((JLabel) renderer).setForeground(Color.RED);
+                    }
+
+                    ((JLabel) renderer).setText(name + " (" + type + ")");
                 }
 
                 return renderer;
@@ -263,6 +271,21 @@ public class InventorySection extends JPanel {
         borrowButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(borrowButton);
 
+        // Action when clicking on "Borrow" button
+        borrowButton.addActionListener((new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if ((inventoryJList.getSelectedValue()) != null) {
+
+                    ((Item) inventoryJList.getSelectedValue()).setCurrentlyBorrowed(true);
+                    //itemDetails.update(itemDetails.getGraphics()); // COME BACK TO THIS
+                    //itemDetails.setText("test update"); // FOR TESTING
+                }
+            }
+        }));
+
         // Empty label to create space between text area and button - only way I could figure out how to do it
         JLabel emptyLabel2 = new JLabel("");
         emptyLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -273,5 +296,18 @@ public class InventorySection extends JPanel {
         JButton returnButton = new JButton("Return");
         returnButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(returnButton);
+
+        // Action when clicking on "Return" button
+        returnButton.addActionListener((new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if ((inventoryJList.getSelectedValue()) != null) {
+
+                    ((Item) inventoryJList.getSelectedValue()).setCurrentlyBorrowed(false);
+                }
+            }
+        }));
     }
 }

@@ -6,7 +6,7 @@ public class Book extends Item {
 
     public Book() {
 
-        super();
+        super(); // Calls constructor from parent (Item)
 
         author = "Default";
         numberOfPages = 0;
@@ -15,7 +15,7 @@ public class Book extends Item {
 
     public Book(String name, int borrowTime, double lateFee, boolean currentlyBorrowed, String author, int numberOfPages, String genre) {
 
-        super(name, borrowTime, lateFee, currentlyBorrowed);
+        super(name, borrowTime, lateFee, currentlyBorrowed);  // Calls constructor from parent (Item)
 
         this.author = author;
 
@@ -54,7 +54,7 @@ public class Book extends Item {
 
     public void setNumberOfPages(int numberOfPages) {
 
-        // Ensuring numberOfPages can't be set to a negative number in the Constructor
+        // Ensuring numberOfPages can't be set to a negative number in the setter
         if (numberOfPages >= 0) {
 
             this.numberOfPages = numberOfPages;

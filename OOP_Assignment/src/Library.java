@@ -5,34 +5,22 @@ public class Library {
     private String addressLine2;
     private String addressLine3;
     private String phone;
-    private int memberCount;
 
     public Library() {
 
-        name = "C & C's Books";
-        addressLine1 = "1010 Java Lane";
-        addressLine2 = "Javatown";
-        addressLine3 = "Javaland";
-        phone = "555-1492";
-        memberCount = 0;
+        name = "Default";
+        addressLine1 = "N/A";
+        addressLine2 = "N/A";
+        addressLine3 = "N/A";
+        phone = "N/A";
     }
 
-    public Library(String name, String addressLine1, String addressLine2, String addressLine3, String phone, int memberCount) {
+    public Library(String name, String addressLine1, String addressLine2, String addressLine3, String phone) {
         this.name = name;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.addressLine3 = addressLine3;
         this.phone = phone;
-
-        // Ensuring memberCount can't be set to a negative number in the Constructor
-        if (memberCount >= 0) {
-
-            this.memberCount = memberCount;
-        }
-        else {
-
-            this.memberCount = 0;
-        }
     }
 
     public String getName() {
@@ -60,11 +48,6 @@ public class Library {
         return phone;
     }
 
-    public int getMemberCount() {
-
-        return memberCount;
-    }
-
     public void setName(String newName) {
 
         name = newName;
@@ -85,21 +68,8 @@ public class Library {
         addressLine1 = newAddressLine3;
     }
 
-    public void setPhone(String newPhone) {
+    public void setPhone(String newPhone){
 
-        phone = newPhone;
-    }
-
-    // Ensuring memberCount can't be set to a negative number in the setter
-    public void setMemberCount(int newMemberCount) {
-
-        if (newMemberCount >= 0) {
-
-            memberCount = newMemberCount;
+            phone = newPhone;
         }
-        else {
-
-            memberCount = 0;
-        }
-    }
 }

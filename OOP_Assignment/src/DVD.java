@@ -5,7 +5,7 @@ public class DVD extends Item {
 
     public DVD() {
 
-        super();
+        super(); // Calls constructor from parent (Item)
 
         this.director = "Default";
         this.length = 0;
@@ -13,7 +13,7 @@ public class DVD extends Item {
 
     public DVD(String name, int borrowTime, double lateFee, boolean currentlyBorrowed, String director, int length) {
 
-        super(name, borrowTime, lateFee, currentlyBorrowed);
+        super(name, borrowTime, lateFee, currentlyBorrowed); // Calls constructor from parent (Item)
 
         this.director = director;
         this.length = length;

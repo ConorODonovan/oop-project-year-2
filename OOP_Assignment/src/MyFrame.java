@@ -1,11 +1,10 @@
-import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
 public class MyFrame extends JFrame {
 
-    private int screenWidth, screenHeight, appWidth, appHeight;
-    private Dimension screenSize, appResolution;
+    private static int screenWidth, screenHeight, appWidth, appHeight;
+    private static Dimension screenSize, appResolution;
 
     public MyFrame() {
 
